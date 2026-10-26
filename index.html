@@ -9,7 +9,7 @@
 <meta name="description" content="Cozinhas, dormitórios, salas e áreas gourmet planejados em Salto/SP. Projeto em 3D aprovado antes da produção. Showroom na Vila Teixeira.">
 <meta property="og:type" content="website"><meta property="og:title" content="Móveis Brasil | Móveis planejados em Salto e região"><meta property="og:description" content="Cozinhas, dormitórios, salas e áreas gourmet planejados em Salto/SP. Projeto em 3D aprovado antes da produção. Showroom na Vila Teixeira."><meta property="og:image" content="assets/img/cozinha-2-768.webp">
 <link rel="icon" href="data:,">
-<link rel="preload" as="image" type="image/avif" href="assets/img/cozinha-2-768.avif" imagesrcset="assets/img/cozinha-2-480.avif 480w, assets/img/cozinha-2-768.avif 768w, assets/img/cozinha-2-1000.avif 1000w" imagesizes="(min-width:960px) 46vw, 92vw" fetchpriority="high">
+<link rel="preload" as="image" type="image/avif" media="(max-width:759px)" imagesrcset="assets/img/hs-cozinha-m-480.avif 480w, assets/img/hs-cozinha-m-768.avif 768w, assets/img/hs-cozinha-m-1080.avif 1080w" imagesizes="100vw" fetchpriority="high"><link rel="preload" as="image" type="image/avif" media="(min-width:760px)" imagesrcset="assets/img/hs-cozinha-d-480.avif 480w, assets/img/hs-cozinha-d-768.avif 768w, assets/img/hs-cozinha-d-1000.avif 1000w" imagesizes="100vw" fetchpriority="high">
 <link rel="preload" href="assets/fonts/Outfit-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <script>document.documentElement.classList.add('js')</script>
 <style>@font-face{font-family:Outfit;src:url(assets/fonts/Outfit-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
@@ -68,6 +68,43 @@ h1{font-size:clamp(2.35rem,6.4vw,4.9rem)}h2{font-size:clamp(1.9rem,4.2vw,3.1rem)
 @keyframes hin{from{opacity:.01;transform:translateY(26px)}to{opacity:1;transform:none}}
 @media(min-width:960px){.hero .wrap{grid-template-columns:1.05fr .95fr;gap:64px}.hero-fig{aspect-ratio:4/4.7}}
 .hero-note{margin-top:22px;color:var(--mut);font-size:.98rem}
+/* primeira dobra com fotos de fundo */
+.hs{padding:0;min-height:100svh;align-items:flex-end;overflow:hidden;background:#0c0c0c;isolation:isolate}
+.hs-slides,.hs-shade{position:absolute;inset:0}
+.hs-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.6s var(--ease);z-index:0}
+.hs-slide.on{opacity:1;z-index:1}.hs-slide.out{z-index:0}
+.hs-slide picture,.hs-slide img{width:100%;height:100%}
+.hs-slide img{object-fit:cover;transform:scale(1.001)}
+.js .hs-slide.on img{animation:hskb 8s linear both}
+@keyframes hskb{from{transform:scale(1.1)}to{transform:scale(1.001)}}
+.hs-shade{z-index:2;pointer-events:none;background:linear-gradient(180deg,rgba(8,8,8,.62) 0,rgba(8,8,8,0) 22%),linear-gradient(0deg,rgba(8,8,8,.96) 0,rgba(8,8,8,.86) 44%,rgba(8,8,8,.5) 72%,rgba(8,8,8,.12) 100%)}
+.hero .hs-in{position:relative;z-index:3;display:grid;grid-template-columns:minmax(0,1fr);gap:28px;padding:120px 0 32px}
+.hs h1{text-shadow:0 2px 24px rgba(0,0,0,.35)}
+.hs .lead{color:#d6d1c8}.hs .hero-note{color:#bdb7ad}
+.hs .btn-g{border-color:rgba(255,255,255,.42);background:rgba(12,12,12,.28);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.hs-ctrl{display:flex;align-items:center;gap:16px;border-top:1px solid var(--line);padding-top:18px}
+.hs-cap{display:flex;align-items:baseline;gap:12px;font-family:var(--d);font-size:.95rem;color:#e9e5dd;min-width:0;flex:1}
+.hs-cap b{font-weight:500;color:var(--oak)}.hs-cap span{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hs-cap.sw span{animation:hscap .6s var(--ease) both}@keyframes hscap{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.hs-dots{display:flex;gap:6px}
+.hs-dot{width:34px;height:44px;border:0;background:none;padding:0;display:grid;align-items:center}
+.hs-dot i{display:block;height:2px;background:rgba(255,255,255,.28);position:relative;overflow:hidden}
+.hs-dot i::after{content:"";position:absolute;inset:0;background:#f5f2ec;transform:scaleX(0);transform-origin:left}
+.hs-dot.done i::after{transform:scaleX(1)}
+.hs-dot.on i::after{animation:hsbar var(--hsd,6.5s) linear both}
+.hs.paused .hs-dot.on i::after{animation-play-state:paused}
+@keyframes hsbar{to{transform:scaleX(1)}}
+.hs-pause{width:44px;height:44px;border:1px solid var(--line);border-radius:50%;background:none;display:flex;align-items:center;justify-content:center;gap:4px;flex:none}
+.hs-pause i{width:2px;height:12px;background:#f5f2ec}
+.hs.paused .hs-pause i:first-child{width:0;height:0;background:none;border-style:solid;border-width:6px 0 6px 10px;border-color:transparent transparent transparent #f5f2ec}.hs.paused .hs-pause i:last-child{display:none}
+@media(min-width:760px){
+ .hs-shade{background:linear-gradient(180deg,rgba(8,8,8,.6) 0,rgba(8,8,8,0) 20%),linear-gradient(90deg,rgba(8,8,8,.9) 0,rgba(8,8,8,.72) 34%,rgba(8,8,8,.12) 70%,rgba(8,8,8,0) 100%),linear-gradient(0deg,rgba(8,8,8,.7) 0,rgba(8,8,8,0) 40%)}
+ .hero .hs-in{padding:150px 0 40px}.hs-copy{max-width:640px}
+}
+.wa{transition:opacity .45s var(--ease),transform .45s var(--ease),visibility .45s}
+.on-hs .wa{opacity:0;visibility:hidden;transform:translateY(16px)}
+@media(min-width:760px){.hs-dot{width:44px}}
+@media(min-width:960px){.hero .hs-in{gap:34px}}
 /* stats */
 .stats{border-block:1px solid var(--line)}
 .stats .wrap{display:grid;grid-template-columns:1fr 1fr;}
@@ -152,6 +189,7 @@ footer a:hover{color:#fff}footer .cols{display:grid;gap:22px}
 .js .rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){
  html{scroll-behavior:auto}
+ .hs-slide{transition:none}.js .hs-slide.on img{animation:none}.hs-dot.on i::after{animation:none;transform:scaleX(1)}.hs-pause{display:none}.hs-cap.sw span{animation:none}
  .js .rv,.js .hin{opacity:1!important;transform:none!important;transition:none!important;animation:none!important}
  .js .curtain{animation:none;transform:scaleY(0)}.js .hero-fig img{animation:none}
  .mq-in{animation:none;width:auto}.mq ul{flex-wrap:wrap;gap:14px 34px;padding:0 16px}.mq ul[aria-hidden]{display:none}
@@ -169,13 +207,18 @@ footer a:hover{color:#fff}footer .cols{display:grid;gap:22px}
 <button class="burger" aria-label="Abrir menu" aria-expanded="false"><i></i><i></i><i></i></button></div></div></header>
 <div class="mnav"><a href="#ambientes">Ambientes</a><a href="#como-funciona">Como funciona</a><a href="#showroom">Showroom</a><a href="#contato">Contato</a></div>
 <main id="main">
-<section class="hero"><div class="wrap">
-<div><p class="kick hin" style="--i:0">Móveis Brasil, ambientes planejados</p>
+<section class="hero hs" aria-label="Ambientes planejados pela Móveis Brasil">
+<div class="hs-slides"><figure class="hs-slide on" data-label="Cozinha"><picture><source media="(max-width:759px)" type="image/avif" srcset="assets/img/hs-cozinha-m-480.avif 480w, assets/img/hs-cozinha-m-768.avif 768w, assets/img/hs-cozinha-m-1080.avif 1080w" sizes="100vw"><source media="(max-width:759px)" type="image/webp" srcset="assets/img/hs-cozinha-m-480.webp 480w, assets/img/hs-cozinha-m-768.webp 768w, assets/img/hs-cozinha-m-1080.webp 1080w" sizes="100vw"><source type="image/avif" srcset="assets/img/hs-cozinha-d-480.avif 480w, assets/img/hs-cozinha-d-768.avif 768w, assets/img/hs-cozinha-d-1000.avif 1000w" sizes="100vw"><source type="image/webp" srcset="assets/img/hs-cozinha-d-480.webp 480w, assets/img/hs-cozinha-d-768.webp 768w, assets/img/hs-cozinha-d-1000.webp 1000w" sizes="100vw"><img src="assets/img/hs-cozinha-d-1000.webp" width="1000" height="666" alt="Cozinha planejada com marcenaria amadeirada, coifa de ilha e bancada escura" fetchpriority="high"></picture></figure><figure class="hs-slide" data-label="Adega" aria-hidden="true"><picture><source media="(max-width:759px)" type="image/avif" data-srcset="assets/img/hs-adega-m-480.avif 480w, assets/img/hs-adega-m-768.avif 768w, assets/img/hs-adega-m-1080.avif 1080w" sizes="100vw"><source media="(max-width:759px)" type="image/webp" data-srcset="assets/img/hs-adega-m-480.webp 480w, assets/img/hs-adega-m-768.webp 768w, assets/img/hs-adega-m-1080.webp 1080w" sizes="100vw"><source type="image/avif" data-srcset="assets/img/hs-adega-d-480.avif 480w, assets/img/hs-adega-d-768.avif 768w, assets/img/hs-adega-d-1080.avif 1080w, assets/img/hs-adega-d-1440.avif 1440w, assets/img/hs-adega-d-1920.avif 1920w" sizes="100vw"><source type="image/webp" data-srcset="assets/img/hs-adega-d-480.webp 480w, assets/img/hs-adega-d-768.webp 768w, assets/img/hs-adega-d-1080.webp 1080w, assets/img/hs-adega-d-1440.webp 1440w, assets/img/hs-adega-d-1920.webp 1920w" sizes="100vw"><img data-src="assets/img/hs-adega-d-1920.webp" width="1920" height="1280" alt="Adega planejada com nichos para vinho, bancada e armários em madeira" decoding="async"></picture></figure><figure class="hs-slide" data-label="Recepção" aria-hidden="true"><picture><source media="(max-width:759px)" type="image/avif" data-srcset="assets/img/hs-comercial-m-480.avif 480w, assets/img/hs-comercial-m-768.avif 768w, assets/img/hs-comercial-m-1080.avif 1080w" sizes="100vw"><source media="(max-width:759px)" type="image/webp" data-srcset="assets/img/hs-comercial-m-480.webp 480w, assets/img/hs-comercial-m-768.webp 768w, assets/img/hs-comercial-m-1080.webp 1080w" sizes="100vw"><source type="image/avif" data-srcset="assets/img/hs-comercial-d-480.avif 480w, assets/img/hs-comercial-d-768.avif 768w, assets/img/hs-comercial-d-1000.avif 1000w" sizes="100vw"><source type="image/webp" data-srcset="assets/img/hs-comercial-d-480.webp 480w, assets/img/hs-comercial-d-768.webp 768w, assets/img/hs-comercial-d-1000.webp 1000w" sizes="100vw"><img data-src="assets/img/hs-comercial-d-1000.webp" width="1000" height="750" alt="Recepção de escritório planejada com balcão escuro e parede iluminada" decoding="async"></picture></figure><figure class="hs-slide" data-label="Cozinha" aria-hidden="true"><picture><source media="(max-width:759px)" type="image/avif" data-srcset="assets/img/hs-integrada-m-480.avif 480w, assets/img/hs-integrada-m-768.avif 768w, assets/img/hs-integrada-m-1080.avif 1080w" sizes="100vw"><source media="(max-width:759px)" type="image/webp" data-srcset="assets/img/hs-integrada-m-480.webp 480w, assets/img/hs-integrada-m-768.webp 768w, assets/img/hs-integrada-m-1080.webp 1080w" sizes="100vw"><source type="image/avif" data-srcset="assets/img/hs-integrada-d-480.avif 480w, assets/img/hs-integrada-d-768.avif 768w, assets/img/hs-integrada-d-1000.avif 1000w" sizes="100vw"><source type="image/webp" data-srcset="assets/img/hs-integrada-d-480.webp 480w, assets/img/hs-integrada-d-768.webp 768w, assets/img/hs-integrada-d-1000.webp 1000w" sizes="100vw"><img data-src="assets/img/hs-integrada-d-1000.webp" width="1000" height="666" alt="Cozinha integrada com torre quente, ilha arredondada e armários cinza" decoding="async"></picture></figure></div>
+<div class="hs-shade"></div>
+<div class="wrap hs-in">
+<div class="hs-copy"><p class="kick hin" style="--i:0">Móveis Brasil, ambientes planejados</p>
 <h1 class="hin" style="--i:1">Móveis planejados em <em>Salto</em> e região</h1>
 <p class="lead hin" style="--i:2">Cozinhas, dormitórios, salas e áreas gourmet desenhados para o seu espaço. Você aprova o projeto em 3D antes de qualquer peça ser produzida.</p>
 <div class="cta-row hin" style="--i:3"><a class="btn btn-p" href="https://wa.me/551128404800?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20M%C3%B3veis%20Brasil%20e%20quero%20conversar%20sobre%20m%C3%B3veis%20planejados%20para%20a%20minha%20casa." target="_blank" rel="noopener">Falar no WhatsApp</a><a class="btn btn-g" href="#ambientes">Ver ambientes</a></div>
 <p class="hero-note hin" style="--i:4">Showroom em Salto/SP. Mais de 10 anos de história.</p></div>
-<figure class="hero-fig"><div class="px"><picture><source type="image/avif" srcset="assets/img/cozinha-2-480.avif 480w, assets/img/cozinha-2-768.avif 768w, assets/img/cozinha-2-1000.avif 1000w" sizes="(min-width:960px) 46vw, 92vw"><source type="image/webp" srcset="assets/img/cozinha-2-480.webp 480w, assets/img/cozinha-2-768.webp 768w, assets/img/cozinha-2-1000.webp 1000w" sizes="(min-width:960px) 46vw, 92vw"><img src="assets/img/cozinha-2-768.webp" width="1000" height="666" alt="Cozinha planejada com marcenaria amadeirada, coifa de ilha e bancada escura" loading="eager" fetchpriority="high"></picture></div><div class="curtain"></div></figure>
+<div class="hs-ctrl hin" style="--i:5"><p class="hs-cap" aria-live="polite"><b>01</b><span>Cozinha</span></p>
+<div class="hs-dots"><button type="button" class="hs-dot on" aria-label="Foto 1: Cozinha"><i></i></button><button type="button" class="hs-dot" aria-label="Foto 2: Adega"><i></i></button><button type="button" class="hs-dot" aria-label="Foto 3: Recepção"><i></i></button><button type="button" class="hs-dot" aria-label="Foto 4: Cozinha"><i></i></button></div>
+<button class="hs-pause" type="button" aria-label="Pausar fotos" aria-pressed="false"><i></i><i></i></button></div>
 </div></section>
 <div class="stats"><div class="wrap">
 <div class="stat rv" style="--i:0"><b>+<i data-count="10">10</i></b><span>anos de história</span></div>
@@ -225,6 +268,21 @@ addEventListener('scroll',sch,{passive:true});addEventListener('resize',sch);fra
 /* abas */
 var tl=$('[role=tablist]');if(tl){var tabs=$$('[role=tab]',tl);function sel(t,f){tabs.forEach(function(x){var on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;var p=d.getElementById(x.getAttribute('aria-controls'));if(on){p.hidden=false;if(!rm){p.classList.remove('enter');void p.offsetWidth;p.classList.add('enter')}}else p.hidden=true});if(f)t.focus()}
 tabs.forEach(function(t,i){t.addEventListener('click',function(){sel(t)});t.addEventListener('keydown',function(e){var k=e.key,n=k==='ArrowRight'?i+1:k==='ArrowLeft'?i-1:k==='Home'?0:k==='End'?tabs.length-1:null;if(n===null)return;e.preventDefault();sel(tabs[(n+tabs.length)%tabs.length],1)})})}
+/* primeira dobra: fotos de fundo */
+var hs=$('.hs');if(hs){var sl=$$('.hs-slide',hs),dots=$$('.hs-dot',hs),cap=$('.hs-cap',hs),pb=$('.hs-pause',hs),cur=0,tm=0,DUR=6500,vis=true,user=false,loaded=false;
+ function load(){if(loaded)return;loaded=true;sl.forEach(function(s){$$('[data-srcset]',s).forEach(function(e){e.srcset=e.dataset.srcset;e.removeAttribute('data-srcset')});var i=$('img[data-src]',s);if(i){i.src=i.dataset.src;i.removeAttribute('data-src')}})}
+ function go(n){load();n=(n+sl.length)%sl.length;if(n===cur)return;var o=sl[cur];o.classList.remove('on');o.classList.add('out');o.setAttribute('aria-hidden','true');setTimeout(function(){o.classList.remove('out')},1700);
+  sl[n].classList.add('on');sl[n].removeAttribute('aria-hidden');dots.forEach(function(d,i){d.classList.toggle('on',i===n);d.classList.toggle('done',i<n)});
+  cap.firstChild.textContent=('0'+(n+1)).slice(-2);var sp=$('span',cap);sp.textContent=sl[n].dataset.label;cap.classList.remove('sw');void cap.offsetWidth;cap.classList.add('sw');cur=n;arm()}
+ function arm(){clearTimeout(tm);if(!rm&&!user&&vis&&!d.hidden){dots[cur].classList.remove('on');void dots[cur].offsetWidth;dots[cur].classList.add('on');tm=setTimeout(function(){go(cur+1)},DUR)}}
+ hs.style.setProperty('--hsd',DUR+'ms');
+ if('IntersectionObserver' in window)new IntersectionObserver(function(es){d.body.classList.toggle('on-hs',es[0].intersectionRatio>.35)},{threshold:[0,.35,.6,1]}).observe(hs);
+ dots.forEach(function(dt,i){dt.addEventListener('click',function(){go(i)})});
+ if(pb)pb.addEventListener('click',function(){user=!user;hs.classList.toggle('paused',user);pb.setAttribute('aria-pressed',user);pb.setAttribute('aria-label',user?'Continuar fotos':'Pausar fotos');user?clearTimeout(tm):arm()});
+ if(rm){hs.classList.add('paused');dots.forEach(function(dt){dt.addEventListener('click',load)})}
+ else{addEventListener('load',function(){setTimeout(load,300)});
+  if('IntersectionObserver' in window)new IntersectionObserver(function(es){vis=es[0].isIntersecting;vis?arm():clearTimeout(tm)},{threshold:.2}).observe(hs);
+  d.addEventListener('visibilitychange',function(){d.hidden?clearTimeout(tm):arm()});arm()}}
 /* formulario -> WhatsApp */
 var f=$('form[data-wa]');if(f){f.addEventListener('submit',function(e){e.preventDefault();var fd=new FormData(f),m=f.dataset.tpl;fd.forEach(function(v,k){m=m.split('{'+k+'}').join(String(v).trim()||'-')});var u='https://wa.me/'+f.dataset.wa+'?text='+encodeURIComponent(m);window.open(u,'_blank','noopener')})}
 })();
